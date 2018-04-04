@@ -7,7 +7,7 @@ import store from './store'
 import db from './firebase'
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
-import '@mdi/font/css/materialdesignicons.css'
+// import '@mdi/font/css/materialdesignicons.min.css'
 
 Vue.use(Buefy)
 
