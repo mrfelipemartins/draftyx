@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import Admin from '@/components/Admin/Admin'
 
 Vue.use(Router)
 
@@ -11,8 +12,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
+      name: 'Index',
+      component: Index,
       meta: {
         requiresAuth: true
       }
@@ -26,6 +27,15 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+      meta: {
+        requiresAuth: true,
+        adminAuth: true
+      }
     }
   ]
 })

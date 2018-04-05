@@ -34,14 +34,13 @@
 
 <script>
 import VueRecaptcha from 'vue-recaptcha'
-import db from '../firebase'
 export default {
   name: 'Login',
   components: { VueRecaptcha },
   data () {
     return {
-      email: '',
-      password: '',
+      email: 'mrfelipemartins@gmail.com',
+      password: '8889dx75',
       isLoading: false,
       error: false,
       errorMessage: ''
@@ -49,16 +48,10 @@ export default {
   },
   methods: {
     signIn: function () {
-      db.auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          this.$store.commit('setUser')
-          this.$router.replace('/')
-        }, error => {
-          this.error = true
-          this.errorMessage = error.message
-          this.isLoading = false
-        })
+      this.$store.dispatch('signIn', {
+        email: this.email,
+        password: this.password
+      })
     }
   }
 }

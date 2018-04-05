@@ -13,12 +13,14 @@ const actions = {
         commit('setLoading', false)
         const newUser = {
           id: user.uid,
-          name: user.displayName,
+          name: payload.fullName,
           email: user.email,
+          isAdmin: false,
+          gender: payload.gender,
+          birthday: payload.birthday,
           photoUrl: user.photoURL
         }
-        commit('setUser', newUser)
-        this.$router.push({path: '/'})
+        db.firestore().collection('users').doc(user.uid).set(newUser)
       }, error => {
         commit('setLoading', false)
         commit('setError', error)
@@ -29,16 +31,24 @@ const actions = {
     commit('clearError')
     db.auth()
       .signInWithEmailAndPassword(payload.email, payload.password)
-      .then(user => {
+      .then((user) => {
         commit('setLoading', false)
-        const newUser = {
-          id: user.uid,
-          name: user.displayName,
-          email: user.email,
-          photoUrl: user.photoURL
-        }
-        commit('setUser', newUser)
-        this.$router.push({path: '/'})
+        db.firestore().collection('users').doc(user.uid).get().then((res) => {
+          if (res.exists) {
+            const newUser = {
+              id: res.data().id,
+              name: res.data().name,
+              email: res.data().email,
+              photoUrl: res.data().photoUrl,
+              isAdmin: res.data().isAdmin,
+              gender: res.data().gender,
+              birthday: res.data().birthday
+            }
+            commit('setUser', newUser)
+          } else {
+            commit('setError', 'Usuário não encontrado')
+          }
+        })
       }, error => {
         commit('setLoading', false)
         commit('setError', error)
@@ -49,7 +59,6 @@ const actions = {
     db.auth().signOut().then(() => {
       commit('setUser', null)
       commit('setLoading', false)
-      this.$router.push({path: '/login'})
     })
   }
 }

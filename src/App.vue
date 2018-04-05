@@ -18,8 +18,16 @@ import Navbar from '@/components/Global/Navbar'
 export default {
   name: 'App',
   components: {Navbar, Footer},
-  created () {
-    this.$store.commit('setUser')
+  methods: {
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      } else {
+        this.$router.push('/login')
+      }
+    }
   },
   computed: {
     user () {

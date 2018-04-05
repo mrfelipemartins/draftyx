@@ -15,16 +15,16 @@
 
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a href="#" class="navbar-item">Home</a>
-          <a href="#" class="navbar-item">Meu Draft</a>
-          <a href="#" class="navbar-item">Meu Time</a>
+          <router-link to="/" class="navbar-item">Home</router-link>
+          <router-link to="/" class="navbar-item">Meu Draft</router-link>
+          <router-link to="/" class="navbar-item">Meu Time</router-link>
         </div>
 
       <div class="navbar-end" v-if="!user">
-        <a class="navbar-item" href="#"><span>Entrar</span></a>
+        <router-link class="navbar-item" to="/login"><span>Entrar</span></router-link>
         <div class="navbar-item">
           <div class="field is-grouped">
-            <p class="control"><a class="button is-white" href="#"><span>Cadastrar</span></a></p>
+            <p class="control"><router-link class="button is-white" to="/register"><span>Cadastrar</span></router-link></p>
           </div>
         </div>
       </div>
@@ -36,6 +36,7 @@
             </figure>
           </a>
           <div class="navbar-dropdown">
+            <a class="navbar-item" href="#" v-if="user.isAdmin">Admin</a>
             <a @click="logOut()" href="#" class="navbar-item">Sair</a>
           </div>
         </div>
