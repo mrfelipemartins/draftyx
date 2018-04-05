@@ -2,9 +2,9 @@
 <nav class="navbar is-black" role="navigation" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <router-link class="navbar-item" to="/">
         DRAFTY
-      </a>
+      </router-link>
 
       <div class="navbar-burger">
         <span></span>
@@ -13,12 +13,12 @@
       </div>
     </div>
 
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <router-link to="/" class="navbar-item">Home</router-link>
-          <router-link to="/" class="navbar-item">Meu Draft</router-link>
-          <router-link to="/" class="navbar-item">Meu Time</router-link>
-        </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <router-link to="/" class="navbar-item">Home</router-link>
+        <router-link to="/" class="navbar-item">Meu Draft</router-link>
+        <router-link to="/" class="navbar-item">Meu Time</router-link>
+      </div>
 
       <div class="navbar-end" v-if="!user">
         <router-link class="navbar-item" to="/login"><span>Entrar</span></router-link>
@@ -36,7 +36,7 @@
             </figure>
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="#" v-if="user.isAdmin">Admin</a>
+            <a class="navbar-item" href="#" v-if="isAdmin">Admin</a>
             <a @click="logOut()" href="#" class="navbar-item">Sair</a>
           </div>
         </div>
@@ -51,6 +51,9 @@ export default {
   computed: {
     user () {
       return this.$store.getters.getUser
+    },
+    isAdmin () {
+      return this.user.email === 'webmaster@savvystudios.com.br'
     }
   },
   methods: {

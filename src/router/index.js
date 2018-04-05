@@ -4,6 +4,7 @@ import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Admin from '@/components/Admin/Admin'
+import AuthGuard from './guards/auth'
 
 Vue.use(Router)
 
@@ -14,9 +15,7 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index,
-      meta: {
-        requiresAuth: true
-      }
+      beforeEnter: AuthGuard
     },
     {
       path: '/login',
@@ -32,10 +31,7 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin,
-      meta: {
-        requiresAuth: true,
-        adminAuth: true
-      }
+      beforeEnter: AuthGuard
     }
   ]
 })

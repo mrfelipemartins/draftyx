@@ -1,17 +1,17 @@
-import db from '../../../firebase'
-
+import firebase from 'firebase'
 const actions = {
   setUser: context => {
     context.commit('setUser')
   },
-  signUp ({commit}, payload) {
+  signUp ({commit, dispatch}, payload) {
     commit('setLoading', true)
     commit('clearError')
-    db.auth()
+    firebase.auth()
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(user => {
         commit('setLoading', false)
-        const newUser = {
+        user.sendEmailVerification()
+        const createUser = {
           id: user.uid,
           name: payload.fullName,
           email: user.email,
@@ -20,43 +20,52 @@ const actions = {
           birthday: payload.birthday,
           photoUrl: user.photoURL
         }
-        db.firestore().collection('users').doc(user.uid).set(newUser)
+        firebase.firestore().collection('users').doc(user.uid).set(createUser)
+        commit('setUser', user)
+        dispatch('getUserData', {id: user.uid})
       }, error => {
         commit('setLoading', false)
         commit('setError', error)
       })
   },
-  signIn ({commit}, payload) {
+  signIn ({commit, dispatch}, payload) {
     commit('setLoading', true)
     commit('clearError')
-    db.auth()
+    firebase.auth()
       .signInWithEmailAndPassword(payload.email, payload.password)
       .then((user) => {
         commit('setLoading', false)
-        db.firestore().collection('users').doc(user.uid).get().then((res) => {
-          if (res.exists) {
-            const newUser = {
-              id: res.data().id,
-              name: res.data().name,
-              email: res.data().email,
-              photoUrl: res.data().photoUrl,
-              isAdmin: res.data().isAdmin,
-              gender: res.data().gender,
-              birthday: res.data().birthday
-            }
-            commit('setUser', newUser)
-          } else {
-            commit('setError', 'Usuário não encontrado')
-          }
-        })
+        commit('setUser', user)
+        dispatch('getUserData', {id: user.uid})
       }, error => {
         commit('setLoading', false)
         commit('setError', error)
       })
   },
+  autoSignIn ({commit, dispatch}, payload) {
+    commit('setUser', payload)
+    dispatch('getUserData', {id: payload.uid})
+  },
+  async getUserData ({commit}, payload) {
+    firebase.firestore().collection('users').doc(payload.id).get().then((res) => {
+      if (res.exists) {
+        const userData = {
+          id: res.data().id,
+          name: res.data().name,
+          email: res.data().email,
+          photoUrl: res.data().photoUrl,
+          isAdmin: res.data().isAdmin,
+          gender: res.data().gender,
+          birthday: res.data().birthday
+        }
+        commit('setUserData', userData)
+        commit('setLoading', false)
+      }
+    })
+  },
   signOut ({commit}) {
     commit('setLoading', true)
-    db.auth().signOut().then(() => {
+    firebase.auth().signOut().then(() => {
       commit('setUser', null)
       commit('setLoading', false)
     })

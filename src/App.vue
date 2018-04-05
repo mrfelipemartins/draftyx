@@ -18,14 +18,15 @@ import Navbar from '@/components/Global/Navbar'
 export default {
   name: 'App',
   components: {Navbar, Footer},
+  beforeCreate () {
+    this.$store.commit('setLoading', true)
+  },
   methods: {
   },
   watch: {
     user (value) {
       if (value !== null && value !== undefined) {
         this.$router.push('/')
-      } else {
-        this.$router.push('/login')
       }
     }
   },
