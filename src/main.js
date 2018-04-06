@@ -7,24 +7,21 @@ import store from './store'
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
 import '@mdi/font/css/materialdesignicons.min.css'
-import config from './config'
-import firebase from 'firebase'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(Buefy)
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+axios.defaults.baseURL = 'http://localhost:8000/api'
 
-router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-
-  if (requiresAuth && !currentUser) {
-    next('/login')
-  } else if (requiresAuth && currentUser) {
-    next()
-  } else {
-    next()
-  }
+Vue.router = router
+Vue.use(require('@websanova/vue-auth'), {
+  rolesVar: 'role',
+  auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+  http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+  router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js')
 })
 
 /* eslint-disable no-new */
@@ -34,18 +31,5 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>',
-  created () {
-    firebase.initializeApp(config)
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$store.dispatch('autoSignIn', user)
-      } else {
-        this.$store.commit('setLoading', false)
-        this.$router.push({path: '/login'})
-      }
-    })
-  }
+  template: '<App/>'
 })
-
-export const db = firebase.firestore()

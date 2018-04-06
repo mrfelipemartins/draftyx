@@ -6,8 +6,8 @@
           <b-notification type="is-info" v-if="user && !user.emailVerified" style="margin-top:20px;">
               Hey! Você ainda não verificou o seu e-mail! Enviamos uma confirmação para <strong>{{user.email}}</strong>.
           </b-notification>
-        <router-view/>
       </div>
+      <router-view/>
       <footer></footer>
     </div>
 </template>
@@ -18,9 +18,6 @@ import Navbar from '@/components/Global/Navbar'
 export default {
   name: 'App',
   components: {Navbar, Footer},
-  beforeCreate () {
-    this.$store.commit('setLoading', true)
-  },
   methods: {
   },
   watch: {

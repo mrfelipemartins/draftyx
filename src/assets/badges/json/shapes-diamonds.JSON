@@ -1,0 +1,19 @@
+{
+"shapes":[
+{"path":"assets/shapes/","file":"diamond1","keywords":"diamond dark"},
+{"path":"assets/shapes/","file":"diamond2","keywords":"diamond medium"},
+{"path":"assets/shapes/","file":"diamond3","keywords":"diamond dark outline"},
+{"path":"assets/shapes/","file":"diamond4","keywords":"diamond medium outline"},
+{"path":"assets/shapes/","file":"diamond5","keywords":"diamond dark outline"},
+{"path":"assets/shapes/","file":"diamond6","keywords":"diamond dark rounded"},
+{"path":"assets/shapes/","file":"diamond7","keywords":"diamond medium rounded"},
+{"path":"assets/shapes/","file":"diamond8","keywords":"diamond dark outline rounded"},
+{"path":"assets/shapes/","file":"diamond9","keywords":"diamond medium outline rounded"},
+{"path":"assets/shapes/","file":"diamond10","keywords":"diamond dark outline rounded"},
+{"path":"assets/shapes/","file":"diamond11","keywords":"diamond dark rounded"},
+{"path":"assets/shapes/","file":"diamond12","keywords":"diamond medium rounded"},
+{"path":"assets/shapes/","file":"diamond13","keywords":"diamond dark outline rounded"},
+{"path":"assets/shapes/","file":"diamond14","keywords":"diamond medium outline rounded"},
+{"path":"assets/shapes/","file":"diamond15","keywords":"diamond dark outline rounded"}
+]
+}

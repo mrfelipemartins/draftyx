@@ -1,0 +1,24 @@
+{
+"shapes":[
+{"path":"assets/shapes/","file":"polygon1","keywords":"pentagon dark"},
+{"path":"assets/shapes/","file":"polygon2","keywords":"pentagon medium"},
+{"path":"assets/shapes/","file":"polygon3","keywords":"pentagon dark outline"},
+{"path":"assets/shapes/","file":"polygon4","keywords":"pentagon medium outline"},
+{"path":"assets/shapes/","file":"polygon5","keywords":"pentagon dark outline"},
+{"path":"assets/shapes/","file":"polygon6","keywords":"octagon dark"},
+{"path":"assets/shapes/","file":"polygon7","keywords":"octagon medium"},
+{"path":"assets/shapes/","file":"polygon8","keywords":"octagon dark outline"},
+{"path":"assets/shapes/","file":"polygon9","keywords":"octagon medium outline"},
+{"path":"assets/shapes/","file":"polygon10","keywords":"octagon dark outline"},
+{"path":"assets/shapes/","file":"polygon11","keywords":"hexagon dark"},
+{"path":"assets/shapes/","file":"polygon12","keywords":"hexagon medium"},
+{"path":"assets/shapes/","file":"polygon13","keywords":"hexagon dark outline"},
+{"path":"assets/shapes/","file":"polygon14","keywords":"hexagon medium outline"},
+{"path":"assets/shapes/","file":"polygon15","keywords":"hexagon dark outline"},
+{"path":"assets/shapes/","file":"polygon16","keywords":"hexagon dark"},
+{"path":"assets/shapes/","file":"polygon17","keywords":"hexagon medium"},
+{"path":"assets/shapes/","file":"polygon18","keywords":"hexagon dark outline"},
+{"path":"assets/shapes/","file":"polygon19","keywords":"hexagon medium outline"},
+{"path":"assets/shapes/","file":"polygon20","keywords":"hexagon dark outline"}
+]
+}

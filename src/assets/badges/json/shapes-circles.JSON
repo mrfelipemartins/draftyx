@@ -1,0 +1,19 @@
+{
+"shapes":[
+{"path":"assets/shapes/","file":"circle1","keywords":"circle dark"},
+{"path":"assets/shapes/","file":"circle2","keywords":"circle medium"},
+{"path":"assets/shapes/","file":"circle3","keywords":"circle dark outline"},
+{"path":"assets/shapes/","file":"circle4","keywords":"circle medium outline"},
+{"path":"assets/shapes/","file":"circle5","keywords":"circle dark outline"},
+{"path":"assets/shapes/","file":"ellipse1","keywords":"oval ellipse circle dark"},
+{"path":"assets/shapes/","file":"ellipse2","keywords":"oval ellipse circle medium"},
+{"path":"assets/shapes/","file":"ellipse3","keywords":"oval ellipse circle dark outline"},
+{"path":"assets/shapes/","file":"ellipse4","keywords":"oval ellipse circle medium outline"},
+{"path":"assets/shapes/","file":"ellipse5","keywords":"oval ellipse circle dark outline"},
+{"path":"assets/shapes/","file":"ellipse6","keywords":"oval ellipse circle dark"},
+{"path":"assets/shapes/","file":"ellipse7","keywords":"oval ellipse circle medium"},
+{"path":"assets/shapes/","file":"ellipse8","keywords":"oval ellipse circle dark outline"},
+{"path":"assets/shapes/","file":"ellipse9","keywords":"oval ellipse circle medium outline"},
+{"path":"assets/shapes/","file":"ellipse10","keywords":"oval ellipse circle dark outline"}
+]
+}

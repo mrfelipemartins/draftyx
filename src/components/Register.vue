@@ -69,12 +69,12 @@ export default {
   components: { VueRecaptcha },
   data () {
     return {
-      email: '',
-      password: '',
-      firstName: '',
-      gender: '',
+      email: 'webmaster@savvystudios.com.br',
+      password: '8889dx75',
+      firstName: 'Felipe',
+      gender: 'male',
       birthday: null,
-      lastName: '',
+      lastName: 'Martins',
       error: false,
       isLoading: false,
       errorMessage: ''
@@ -83,16 +83,33 @@ export default {
   computed: {
     fullName () {
       return `${this.firstName} ${this.lastName}`
+    },
+    formattedDate () {
+      return this.birthday.toString()
     }
   },
   methods: {
     signUp: function () {
-      this.$store.dispatch('signUp', {
-        email: this.email,
-        password: this.password,
-        fullName: this.fullName,
-        birthday: this.birthday,
-        gender: this.gender
+      var _this = this
+      _this.$store.commit('setLoading', true)
+      this.$auth.register({
+        params: {
+          email: this.email,
+          password: this.password,
+          name: this.fullName,
+          birthday: this.formattedDate,
+          gender: this.gender
+        },
+        success: function () {
+          _this.$store.commit('setLoading', false)
+        },
+        error: function (resp) {
+          _this.error = true
+          _this.errorMessage = resp.response.data.errors
+        },
+        redirect: {
+          name: 'Login'
+        }
       })
     }
   }

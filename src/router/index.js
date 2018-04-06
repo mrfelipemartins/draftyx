@@ -4,7 +4,7 @@ import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Admin from '@/components/Admin/Admin'
-import AuthGuard from './guards/auth'
+import CreateTeam from '@/components/CreateTeam'
 
 Vue.use(Router)
 
@@ -15,23 +15,41 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index,
-      beforeEnter: AuthGuard
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        auth: false
+      }
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: Register,
+      meta: {
+        auth: false
+      }
     },
     {
       path: '/admin',
       name: 'Admin',
       component: Admin,
-      beforeEnter: AuthGuard
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/create-team',
+      name: 'CreateTeam',
+      component: CreateTeam,
+      meta: {
+        auth: true
+      }
     }
   ]
 })

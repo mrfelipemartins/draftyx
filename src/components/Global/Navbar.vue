@@ -20,7 +20,7 @@
         <router-link to="/" class="navbar-item">Meu Time</router-link>
       </div>
 
-      <div class="navbar-end" v-if="!user">
+      <div class="navbar-end" v-if="!$auth.check()">
         <router-link class="navbar-item" to="/login"><span>Entrar</span></router-link>
         <div class="navbar-item">
           <div class="field is-grouped">
@@ -36,7 +36,7 @@
             </figure>
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="#" v-if="isAdmin">Admin</a>
+            <a class="navbar-item" v-if="$auth.check('admin')" href="#">Admin</a>
             <a @click="logOut()" href="#" class="navbar-item">Sair</a>
           </div>
         </div>
@@ -50,15 +50,15 @@ export default {
   name: 'Navbar',
   computed: {
     user () {
-      return this.$store.getters.getUser
-    },
-    isAdmin () {
-      return this.user.email === 'webmaster@savvystudios.com.br'
+      return this.$auth.user()
     }
   },
   methods: {
     logOut () {
-      this.$store.dispatch('signOut')
+      this.$auth.logout({
+        makeRequest: true,
+        redirect: '/login'
+      })
     }
   }
 }

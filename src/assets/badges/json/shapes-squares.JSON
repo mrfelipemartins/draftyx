@@ -1,0 +1,24 @@
+{
+"shapes":[
+{"path":"assets/shapes/","file":"square1","keywords":"square dark"},
+{"path":"assets/shapes/","file":"square2","keywords":"square medium"},
+{"path":"assets/shapes/","file":"square3","keywords":"square dark outline"},
+{"path":"assets/shapes/","file":"square4","keywords":"square medium outline"},
+{"path":"assets/shapes/","file":"square5","keywords":"square dark outline"},
+{"path":"assets/shapes/","file":"square6","keywords":"square dark rounded"},
+{"path":"assets/shapes/","file":"square7","keywords":"square medium rounded"},
+{"path":"assets/shapes/","file":"square8","keywords":"square dark outline rounded"},
+{"path":"assets/shapes/","file":"square9","keywords":"square medium outline rounded"},
+{"path":"assets/shapes/","file":"square10","keywords":"square dark outline rounded"},
+{"path":"assets/shapes/","file":"square11","keywords":"square dark rounded"},
+{"path":"assets/shapes/","file":"square12","keywords":"square medium rounded"},
+{"path":"assets/shapes/","file":"square13","keywords":"square dark outline rounded"},
+{"path":"assets/shapes/","file":"square14","keywords":"square medium outline rounded"},
+{"path":"assets/shapes/","file":"square15","keywords":"square dark outline rounded"},
+{"path":"assets/shapes/","file":"square16","keywords":"square dark rounded"},
+{"path":"assets/shapes/","file":"square17","keywords":"square medium rounded"},
+{"path":"assets/shapes/","file":"square18","keywords":"square dark outline rounded"},
+{"path":"assets/shapes/","file":"square19","keywords":"square medium outline rounded"},
+{"path":"assets/shapes/","file":"square20","keywords":"square dark outline rounded"}
+]
+}

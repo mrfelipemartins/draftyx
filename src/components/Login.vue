@@ -39,7 +39,7 @@ export default {
   components: { VueRecaptcha },
   data () {
     return {
-      email: 'mrfelipemartins@gmail.com',
+      email: 'webmaster@savvystudios.com.br',
       password: '8889dx75',
       isLoading: false,
       error: false,
@@ -48,9 +48,15 @@ export default {
   },
   methods: {
     signIn: function () {
-      this.$store.dispatch('signIn', {
-        email: this.email,
-        password: this.password
+      var _this = this
+      this.$auth.login({
+        params: {
+          email: _this.email,
+          password: _this.password
+        },
+        rememberMe: true,
+        redirect: '/',
+        fetchUser: true
       })
     }
   }
