@@ -5,14 +5,14 @@
         <div class="preview has-text-centered">
           <div id="badge" style="position:relative; width:200px; height:200px; margin: 0 auto; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABV0RVh0Q3JlYXRpb24gVGltZQAyMS8yLzEzf4f4qwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAA/SURBVDiNY3z37t1/BiQgKCjIgA+8f/8ehc+EVzURYOANYPz//z9KGKD7ER2gh9HAe2HUACoYwIIe7yMwLwAAjvsTsyOvNYsAAAAASUVORK5CYII=')">
             <img :src="activeShape" width="200" height="200" style="position: absolute; top:0; left:0; z-index:0">
-            <vue-draggable-resizable :w="100" :h="100" :parent="true" :resizable="false">
+            <vue-draggable-resizable :w="100" :h="100" :parent="true">
               <img :src="activeIcon" width="100" height="100" alt="" style="cursor: move; position:absolute; top:0; left:0; z-index:1">
             </vue-draggable-resizable>
             <vue-draggable-resizable :w="200" :h="50" :parent="true" :resizable="false">
               <img :src="activeBanner" width="200" alt="" style="cursor: move; position:absolute; top:0; left:0; z-index:5">
             </vue-draggable-resizable>
             <vue-draggable-resizable :w="200" :h="50" :parent="true" v-if="selectedBanner" :resizable="false">
-              <div style="cursor: move; position:absolute; top:0; padding-left:20px; padding-right:20px; left:0; text-align: center; background:none; font-family: 'Oswald', sans-serif; font-size:24px; width:200px; border:none; color:#FFF; z-index:7">{{name}}</div>
+              <div :style="'cursor: move; position:absolute; top:0; padding-left:20px; padding-right:20px; left:0; text-align: center; background:none; font-family: \'Oswald\', sans-serif; font-size:24px; width:200px; border:none; color:'+ textColor +'; z-index:7'">{{name}}</div>
             </vue-draggable-resizable>
           </div>
         </div>
@@ -31,38 +31,43 @@
             <label>Cor do Adorno:</label>
             <input type="color" class="input" name="" value="" v-model="bannerColor" @change="changeBanner(selectedBanner)">
           </div>
+          <div class="field">
+            <label>Cor Texto:</label>
+            <input type="color" class="input" name="" value="" v-model="textColor">
+          </div>
         </div>
       </div>
     </div>
     <b-tabs type="is-toggle" expanded>
-        <b-tab-item label="Formas" icon="shape">
+        <b-tab-item label="Formas" icon="shape" style="max-height: 200px; overflow-x:hidden; overflow-y: auto">
           <div class="columns is-mobile" v-for="i in Math.ceil(shapes.shapes.length / 12)" :key="i">
             <div class="column is-1 is-4-mobile" v-for="shape in shapes.shapes.slice((i - 1) * 12, i * 12)" :key="shape.file" @click="changeShape(shape)">
               <div :class="(selectedShape == shape) ? 'badge-selection badge-selected' : 'badge-selection'">
-                <img :src="badgeUrl(shape.path, shape.file)" alt="">
+                <img :src="badgeUrl(shape.path, shape.file, 'png')" alt="">
               </div>
             </div>
           </div>
         </b-tab-item>
-        <b-tab-item label="Icones" icon="image-filter">
+        <b-tab-item label="Icones" icon="image-filter" style="max-height: 200px; overflow-x:hidden; overflow-y: auto">
             <div class="columns is-mobile" v-for="i in Math.ceil(icons.shapes.length / 12)" :key="i">
               <div class="column is-1 is-4-mobile" v-for="icon in icons.shapes.slice((i - 1) * 12, i * 12)" :key="icon.file" @click="changeIcon(icon)">
                 <div :class="(selectedIcon == icon) ? 'badge-selection badge-selected' : 'badge-selection'">
-                <img :src="badgeUrl(icon.path, icon.file)" alt="">
+                <img :src="badgeUrl(icon.path, icon.file, 'png')" alt="">
               </div>
             </div>
           </div>
         </b-tab-item>
-        <b-tab-item label="Adornos" icon="xmpp">
+        <b-tab-item label="Adornos" icon="xmpp" style="max-height: 200px; overflow-x:hidden; overflow-y: auto">
             <div class="columns is-mobile" v-for="i in Math.ceil(banners.shapes.length / 6)" :key="i">
               <div class="column is-2 is-4-mobile" v-for="banner in banners.shapes.slice((i - 1) * 6, i * 6)" :key="banner.file" @click="changeBanner(banner)">
                 <div :class="(selectedBanner == banner) ? 'badge-selection badge-selected' : 'badge-selection'">
-                <img :src="badgeUrl(banner.path, banner.file)" alt="">
+                <img :src="badgeUrl(banner.path, banner.file, 'png')" alt="">
               </div>
             </div>
           </div>
         </b-tab-item>
     </b-tabs>
+    <button type="button" class="button is-success" name="button" @click="saveBadge()">Salvar Escudo</button>
   </div>
 </template>
 
@@ -98,8 +103,11 @@ export default {
     layer3 () { return this.$refs.layer3 }
   },
   methods: {
-    badgeUrl (path, file) {
-      return `/static/${path}${file}.png`
+    saveBadge () {
+      this.$emit('saveBadge')
+    },
+    badgeUrl (path, file, ext) {
+      return `/static/${path}${file}.${ext}`
     },
     hex2dec (number) {
       if (!/^[0-9A-Fa-f]{1,10}$/.test(number)) return '#NUM!'
@@ -112,7 +120,7 @@ export default {
       canvas.width = width
       canvas.height = height
       var image = new Image()
-      image.src = this.badgeUrl(item.path, item.file)
+      image.src = this.badgeUrl(item.path, item.file, 'png')
       context.clearRect(0, 0, canvas.width, canvas.height)
       context.drawImage(image, 0, 0, canvas.width, canvas.height)
       var imageData = context.getImageData(0, 0, canvas.width, canvas.height)

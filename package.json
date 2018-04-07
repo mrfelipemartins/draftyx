@@ -23,6 +23,7 @@
     "buefy": "^0.6.5",
     "cors": "^2.8.4",
     "firebase": "^4.12.1",
+    "html2canvas": "^1.0.0-alpha.12",
     "uuid": "^3.2.1",
     "vue": "^2.5.2",
     "vue-draggable-resizable": "^1.7.1",
