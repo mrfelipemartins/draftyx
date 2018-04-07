@@ -1,0 +1,17 @@
+.badge-selection {
+  border:2px solid #ccc;
+  padding:15px;
+  cursor:pointer;
+}
+.badge-selected {
+  border-color:green;
+}
+.badges-selection {
+  max-height: 300px;
+  height: 300px;
+  overflow-x:hidden;
+  overflow-y: auto;
+}
+#badge {
+  border:2px solid #ccc;
+}

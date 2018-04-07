@@ -54,6 +54,17 @@ export default {
           email: _this.email,
           password: _this.password
         },
+        success: function () {
+        },
+        error: function (resp) {
+          _this.isLoading = false
+          _this.error = true
+          if (resp.response) {
+            _this.errorMessage = resp.response.data.msg
+          } else {
+            _this.errorMessage = 'Ocorreu um erro ao conectar-se ao servidor. Tente novamente. Se o problema persistir, verifique se não há uma manutenção em andamento.'
+          }
+        },
         rememberMe: true,
         redirect: '/',
         fetchUser: true

@@ -16,11 +16,11 @@
         <div class="box">
           <div class="field">
             <label class="label is-large">Nome do Time</label>
-            <input type="text" name="" value="" class="input is-large" placeholder="Ex: Red Canids">
+            <input type="text" name="" v-model="name" value="" class="input is-large" placeholder="Ex: Red Canids">
           </div>
           <div class="field">
             <label class="label is-large">Escudo do Time</label>
-            <badge-designer></badge-designer>
+            <badge-designer :name="name"></badge-designer>
           </div>
         </div>
       </div>
@@ -32,6 +32,11 @@ import BadgeDesigner from './BadgeDesigner.vue'
 export default {
   name: 'CreateTeam',
   components: {BadgeDesigner},
+  data () {
+    return {
+      name: ''
+    }
+  },
   computed: {
     user () {
       return this.$auth.user
